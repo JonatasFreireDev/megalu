@@ -1,9 +1,13 @@
 import React from 'react';
 
+import * as S from './styles';
+
 const Home: React.FC = () => {
   return (
     <>
-      <h1>aew</h1>
+      <S.Container>
+        <h1>aew</h1>
+      </S.Container>
     </>
   );
 };

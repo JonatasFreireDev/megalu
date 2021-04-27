@@ -11,7 +11,7 @@ export default createGlobalStyle`
   body, html, #root{
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
-    height: 100%;
+    min-height: 100%;
     overflow-x: hidden;
     font-family: Arial, tahoma, verdana;
   }

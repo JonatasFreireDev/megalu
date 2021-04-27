@@ -1,22 +1,51 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiSearch, FiShoppingBag, FiHelpCircle } from 'react-icons/fi';
+import { AiOutlineClose } from 'react-icons/ai';
 import { BsHeartFill } from 'react-icons/bs';
 import * as S from './styles';
 
 import magalu from '../../assets/lu-header.png';
 import logo from '../../assets/magalu-header.svg';
 
+import { MenuData } from './SubMenu/MenuData';
+
 const Header: React.FC = () => {
-  const [dropDownHelp, setDropDownHelp] = useState<boolean>(false);
+  const [dropDownHelp, setDropDownHelp] = useState(false);
+  const [headerIsVisible, setHeaderIsVisible] = useState(true);
+  const [headerIsVisibleClosed, setHeaderIsVisibleClosed] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    window.addEventListener('scroll', changeHeaderVisible);
+
+    return () => {
+      window.removeEventListener('scroll', changeHeaderVisible);
+    };
+  }, [headerIsVisibleClosed]);
+
+  const changeHeaderVisible = useCallback(() => {
+    if (!headerIsVisibleClosed) {
+      if (window.pageYOffset < 150) {
+        setHeaderIsVisible(true);
+      } else {
+        setHeaderIsVisible(false);
+      }
+    }
+  }, [headerIsVisibleClosed]);
+
+  const handleCloseHeader = useCallback(() => {
+    setHeaderIsVisible(true);
+    setHeaderIsVisibleClosed(true);
+  }, []);
 
   const dropHelp = useCallback((isActive: boolean) => {
     setDropDownHelp(isActive);
   }, []);
 
   return (
-    <S.Container>
+    <S.Container ref={ref} HeaderIsVisible={headerIsVisible}>
       <header>
         <img src={magalu} alt="magalu" />
         <div>
@@ -66,10 +95,29 @@ const Header: React.FC = () => {
                 <FiShoppingBag />
                 <span className="green">0</span>
               </div>
+              <button
+                onClick={handleCloseHeader}
+                style={
+                  headerIsVisible ? { display: 'none' } : { display: 'block' }
+                }
+              >
+                <AiOutlineClose color="white" />
+              </button>
             </S.Icons>
           </S.SearchHeader>
-          <S.MenuList>
-            <button>aw</button>
+          <S.MenuList HeaderIsVisible={headerIsVisible}>
+            {MenuData.map(item => (
+              <S.DropDown key={item.title} title={item.title}>
+                <ul>
+                  {item.data.map(link => (
+                    <li>
+                      <a href={link.path}>{link.name}</a>
+                    </li>
+                  ))}
+                </ul>
+                {item.image ? <img src={item.image} alt={item.title} /> : ''}
+              </S.DropDown>
+            ))}
           </S.MenuList>
         </div>
       </header>
@@ -89,4 +137,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

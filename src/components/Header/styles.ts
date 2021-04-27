@@ -1,30 +1,52 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { appearFromTop } from '../../styles/keyframs';
+import DropDownMenu from './SubMenu';
 
 interface IdropHelp {
   dropHelp: boolean;
 }
 
-export const Container = styled.div`
+interface IHeaderIsVisible {
+  HeaderIsVisible: boolean;
+}
+
+export const Container = styled.div<IHeaderIsVisible>`
   background: ${props => props.theme.theme.mainTheme};
   width: 100%;
   color: white;
+  transition: position 0.5s;
+  position: ${props => (!props.HeaderIsVisible ? 'fixed' : '')};
+
+  @media (max-width: 800px) {
+    & {
+      flex-wrap: wrap;
+    }
+  }
 
   header {
     display: flex;
     flex-direction: row;
     max-width: 1300px;
     margin: auto;
-    padding-top: 20px;
+    padding-top: ${props => (!props.HeaderIsVisible ? '0px' : '20px')};
+    height: ${props => (!props.HeaderIsVisible ? '70px' : '120px')};
+
+    @media (max-width: 800px) {
+      & {
+        height: ${props => (!props.HeaderIsVisible ? '70px' : '160px')};
+      }
+    }
 
     & > img {
+      display: ${props => (!props.HeaderIsVisible ? 'none' : '')};
       max-width: 100px;
-      width: 100%;
+      height: 100%;
+      transition: all 0.3s;
     }
 
     & > div {
       width: 100%;
-      margin-left: 30px;
+      margin-left: 25px;
     }
 
     a {
@@ -52,11 +74,15 @@ export const SearchHeader = styled.div`
     margin-right: 20px;
     min-width: 150px;
 
+    @media (max-width: 700px) {
+      & {
+        display: none;
+      }
+    }
     img {
       display: block;
       margin-top: 10px;
-      min-width: 150px;
-      max-width: 100px;
+      max-width: 150px;
       width: 100%;
     }
   }
@@ -118,7 +144,8 @@ export const Icons = styled.div`
   display: flex;
   flex-direction: row;
 
-  div {
+  div,
+  button {
     position: relative;
 
     svg {
@@ -188,7 +215,43 @@ export const MenuHelp = styled.div<IdropHelp>`
   }
 `;
 
-export const MenuList = styled.div``;
+export const MenuList = styled.div<IHeaderIsVisible>`
+  display: ${props => (!props.HeaderIsVisible ? 'none' : 'flex')};
+  width: 100%;
+  height: 50px;
+
+  @media (max-width: 800px) {
+    & {
+      flex-wrap: wrap;
+    }
+  }
+`;
+
+export const DropDown = styled(DropDownMenu)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  ul {
+    margin: 10px;
+    li {
+      text-align: left;
+      margin: 10px;
+      a {
+        color: black;
+
+        &:hover {
+          text-decoration: underline !important;
+        }
+      }
+    }
+  }
+
+  img {
+    width: 100%;
+    max-width: 300px;
+  }
+`;
 
 export const ArcoIris = styled.div`
   /* margin-top: -5px; */
