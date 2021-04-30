@@ -11,10 +11,11 @@ interface IHeaderIsVisible {
 }
 
 export const Container = styled.div<IHeaderIsVisible>`
+  z-index: 100;
   background: ${props => props.theme.theme.mainTheme};
   width: 100%;
   color: white;
-  transition: position 0.5s;
+  transition: all 0.5s;
   position: ${props => (!props.HeaderIsVisible ? 'fixed' : '')};
 
   @media (max-width: 800px) {

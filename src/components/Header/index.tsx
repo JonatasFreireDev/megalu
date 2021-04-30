@@ -110,7 +110,7 @@ const Header: React.FC = () => {
               <S.DropDown key={item.title} title={item.title}>
                 <ul>
                   {item.data.map(link => (
-                    <li>
+                    <li key={link.name}>
                       <a href={link.path}>{link.name}</a>
                     </li>
                   ))}

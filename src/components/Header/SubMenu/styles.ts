@@ -6,6 +6,7 @@ interface IdropHelp {
 }
 
 export const Container = styled.div`
+  z-index: 100;
   text-align: center;
   transition: all 0.2s;
   margin-right: 30px;
