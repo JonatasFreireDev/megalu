@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 interface IProps {
-  handleScroll: boolean;
+  HeaderIsVisible: boolean;
 }
 
 export const Container = styled.div<IProps>`
-  margin-top: ${props => (props.handleScroll ? '120px' : '')};
+   margin-top: ${props => (props.HeaderIsVisible ? '' : '120px')};
 
   div {
     top: -10px;

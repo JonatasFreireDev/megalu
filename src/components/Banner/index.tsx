@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useCallback, useEffect, useState } from 'react';
 import Slider, { Settings } from 'react-slick';
+import { usePageConfig } from '../../store/PageConfig';
 import * as S from './styles';
 
 interface IBannerProps {
@@ -17,23 +18,7 @@ export interface BannerContent {
 }
 
 const Banner: React.FC<IBannerProps> = ({ content }) => {
-  const [handleScroll, setHandleScroll] = useState(false);
-
-  useEffect(() => {
-    window.addEventListener('scroll', changeHeaderVisible);
-
-    return () => {
-      window.removeEventListener('scroll', changeHeaderVisible);
-    };
-  }, []);
-
-  const changeHeaderVisible = useCallback(() => {
-    if (window.pageYOffset > 150) {
-      setHandleScroll(true);
-    } else {
-      setHandleScroll(false);
-    }
-  }, []);
+  const { getHeaderIsVisible } = usePageConfig();
 
   const settings: Settings = {
     dots: true,
@@ -46,7 +31,7 @@ const Banner: React.FC<IBannerProps> = ({ content }) => {
   };
 
   return (
-    <S.Container handleScroll={handleScroll}>
+    <S.Container HeaderIsVisible={getHeaderIsVisible}>
       <span>.</span>
       <Slider {...settings}>
         {content.map(item => (
