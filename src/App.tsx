@@ -9,6 +9,7 @@ import { lightTheme } from './styles/lightTheme';
 
 import Routes from './routes';
 import Header from './components/Header';
+import { SpaceToHeader } from './components/SpaceToHeader';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <BrowserRouter>
             <GlobalStyle />
             <Header />
+            <SpaceToHeader />
             <Routes />
           </BrowserRouter>
         </ThemeProvider>

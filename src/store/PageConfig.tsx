@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 
 interface PageConfigContextData {
-  toggleHeaderMenu(isVisible: boolean): void;
+  setHeaderIsVisible(isVisible: boolean): void;
   getHeaderIsVisible: boolean;
-  setHeaderIsVisibleClosed(close: boolean): void;
-  headerIsVisibleClosed: boolean;
+  setHeaderIsClosed(close: boolean): void;
+  getHeaderIsClosed: boolean;
 }
 
 const PageConfigContext = createContext<PageConfigContextData>(
@@ -12,28 +12,24 @@ const PageConfigContext = createContext<PageConfigContextData>(
 );
 
 const PageConfigProvider: React.FC = ({ children }) => {
-  const [HeaderIsVisible, setHeaderIsVisible] = useState(true);
-  const [headerIsVisibleClosed, setStateHeaderIsVisibleClosed] = useState(
-    false
-  );
+  const [getHeaderIsVisible, setHeaderVisible] = useState(true);
+  const [getHeaderIsClosed, setStateHeaderIsClosed] = useState(false);
 
-  const toggleHeaderMenu = useCallback((isVisible: boolean) => {
-    setHeaderIsVisible(isVisible);
+  const setHeaderIsVisible = useCallback((isVisible: boolean) => {
+    setHeaderVisible(isVisible);
   }, []);
 
-  const getHeaderIsVisible = HeaderIsVisible;
-
-  const setHeaderIsVisibleClosed = useCallback((close: boolean) => {
-    setStateHeaderIsVisibleClosed(close);
+  const setHeaderIsClosed = useCallback((close: boolean) => {
+    setStateHeaderIsClosed(close);
   }, []);
 
   return (
     <PageConfigContext.Provider
       value={{
         getHeaderIsVisible,
-        toggleHeaderMenu,
-        headerIsVisibleClosed,
-        setHeaderIsVisibleClosed,
+        setHeaderIsVisible,
+        getHeaderIsClosed,
+        setHeaderIsClosed,
       }}
     >
       {children}

@@ -5,8 +5,6 @@ interface IProps {
 }
 
 export const Container = styled.div<IProps>`
-   margin-top: ${props => (props.HeaderIsVisible ? '' : '120px')};
-
   div {
     top: -10px;
 

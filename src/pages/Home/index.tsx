@@ -67,12 +67,10 @@ const bannerContent: BannerContent[] = [
 
 const Home: React.FC = () => {
   return (
-    <>
-      <S.Container>
-        <Banner content={bannerContent} />
-        <h1>aew</h1>
-      </S.Container>
-    </>
+    <S.Container>
+      <Banner content={bannerContent} />
+      <h1>aew</h1>
+    </S.Container>
   );
 };
 

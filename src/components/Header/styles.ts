@@ -30,6 +30,10 @@ export const Container = styled.div<IHeaderIsVisible>`
       & {
         height: ${props => (!props.HeaderIsVisible ? '70px' : '160px')};
       }
+
+      & > img {
+        display: none;
+      }
     }
 
     & > img {
@@ -54,6 +58,3 @@ export const Container = styled.div<IHeaderIsVisible>`
     }
   }
 `;
-
-
-

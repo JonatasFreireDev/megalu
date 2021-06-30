@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import * as S from './styles';
 import magalu from '../../assets/lu-header.png';
@@ -12,30 +12,29 @@ import { usePageConfig } from '../../store/PageConfig';
 const Header: React.FC = () => {
   const {
     getHeaderIsVisible,
-    toggleHeaderMenu,
-    headerIsVisibleClosed,
+    setHeaderIsVisible,
+    getHeaderIsClosed,
   } = usePageConfig();
-  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     window.addEventListener('scroll', changeHeaderVisible);
     return () => {
       window.removeEventListener('scroll', changeHeaderVisible);
     };
-  }, [headerIsVisibleClosed]);
+  }, [getHeaderIsClosed]);
 
   const changeHeaderVisible = useCallback(() => {
-    if (!headerIsVisibleClosed) {
+    if (!getHeaderIsClosed) {
       if (window.pageYOffset < 150) {
-        toggleHeaderMenu(true);
+        setHeaderIsVisible(true);
       } else {
-        toggleHeaderMenu(false);
+        setHeaderIsVisible(false);
       }
     }
-  }, [headerIsVisibleClosed]);
+  }, [getHeaderIsClosed]);
 
   return (
-    <S.Container ref={ref} HeaderIsVisible={getHeaderIsVisible}>
+    <S.Container HeaderIsVisible={getHeaderIsVisible}>
       <header>
         <img src={magalu} alt="magalu" />
         <div>

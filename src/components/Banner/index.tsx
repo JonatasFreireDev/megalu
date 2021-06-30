@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import Slider, { Settings } from 'react-slick';
 import { usePageConfig } from '../../store/PageConfig';
 import * as S from './styles';
