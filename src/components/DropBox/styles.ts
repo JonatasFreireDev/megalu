@@ -1,26 +1,34 @@
 import styled from 'styled-components';
-import { appearFromTop } from '../../../../styles/keyframs';
+import { appearFromTop } from '../../styles/keyframs';
 
-interface IdropHelp {
-  dropHelp: boolean;
+interface IDropBox {
+  boxStatus: boolean;
 }
 
 export const Container = styled.div`
   z-index: 100;
   text-align: center;
   transition: all 0.2s;
-  margin-right: 30px;
   padding: 10px;
   border-radius: 10px;
 
-  span {
-    height: 100%;
-    text-align: center;
+  & > span{
+    margin-right: 20px;
+  }
+
+  & > svg {
+    display: block;
+    position: relative;
+    margin-right: -20px;
+
+    &:hover {
+      filter: brightness(0.5);
+    }
   }
 `;
 
-export const MenuHelp = styled.div<IdropHelp>`
-  display: ${props => (props.dropHelp ? 'block' : 'none')};
+export const MenuHelp = styled.div<IDropBox>`
+  display: ${props => (props.boxStatus ? 'block' : 'none')};
   position: absolute !important;
   transition: all 0.3s;
 `;
@@ -31,14 +39,22 @@ export const DropDown = styled.div`
   position: relative !important;
   padding: 5px;
   right: 10px;
-  min-width: 200px;
   border-radius: 5px;
   background: white;
   color: black;
   margin-top: 10px;
+  border-bottom: 5px solid ${props => (props.theme.theme.mainTheme)};
 
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 800px) {
+    & {
+      max-width: 250px;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+  }
 
   &::before {
     content: '';
@@ -53,25 +69,5 @@ export const DropDown = styled.div`
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-bottom: 5px solid white;
-  }
-
-  ul {
-    margin: 10px;
-    li {
-      text-align: left;
-      margin: 10px;
-      a {
-        color: black;
-
-        &:hover {
-          text-decoration: underline !important;
-        }
-      }
-    }
-  }
-
-  img {
-    width: 100%;
-    max-width: 300px;
   }
 `;

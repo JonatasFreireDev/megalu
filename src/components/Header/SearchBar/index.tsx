@@ -7,22 +7,18 @@ import logo from '../../../assets/magalu-header.svg';
 
 import * as S from './styles';
 import { usePageConfig } from '../../../store/PageConfig';
+import DropBox from '../../DropBox';
 
 export const SearchBar: React.FC = () => {
-  const [dropDownHelp, setDropDownHelp] = useState(false);
   const {
     getHeaderIsVisible,
-    toggleHeaderMenu,
-    setHeaderIsVisibleClosed,
+    setHeaderIsVisible,
+    setHeaderIsClosed,
   } = usePageConfig();
 
   const handleCloseHeader = useCallback(() => {
-    toggleHeaderMenu(true);
-    setHeaderIsVisibleClosed(true);
-  }, []);
-
-  const dropHelp = useCallback((isActive: boolean) => {
-    setDropDownHelp(isActive);
+    setHeaderIsVisible(true);
+    setHeaderIsClosed(true);
   }, []);
 
   return (
@@ -45,16 +41,8 @@ export const SearchBar: React.FC = () => {
       </div>
       {/* Icones----------------------------------------------------------------- */}
       <S.Icons>
-        <div
-          onMouseEnter={() => {
-            dropHelp(true);
-          }}
-          onMouseLeave={() => {
-            dropHelp(false);
-          }}
-        >
-          <FiHelpCircle />
-          <S.MenuHelp dropHelp={dropDownHelp}>
+        <button>
+          <DropBox className="DropBoxStyle" Icon={FiHelpCircle}>
             <ul>
               <li>Ajuda:</li>
               <li>Nossas Lojas</li>
@@ -66,16 +54,16 @@ export const SearchBar: React.FC = () => {
               <li>Compre pelo tel: 0800 773 3838</li>
               <li>Meus pedidos</li>
             </ul>
-          </S.MenuHelp>
-        </div>
-        <div>
+          </DropBox>
+        </button>
+        <button>
           <BsHeartFill />
           <span className="purple">0</span>
-        </div>
-        <div>
+        </button>
+        <button>
           <FiShoppingBag />
           <span className="green">0</span>
-        </div>
+        </button>
         {/* Botao para fechar Header----------------------------------------------- */}
         <button
           onClick={handleCloseHeader}

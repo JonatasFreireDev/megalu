@@ -1,10 +1,4 @@
-import styled, { css } from 'styled-components';
-import { appearFromTop } from '../../../styles/keyframs';
-import DropDownMenu from '../SubMenu';
-
-interface IdropHelp {
-  dropHelp: boolean;
-}
+import styled from 'styled-components';
 
 export const SearchHeader = styled.div`
   margin-top: 10px;
@@ -15,31 +9,62 @@ export const SearchHeader = styled.div`
   width: 100%;
   height: 50px;
 
-  a {
-    position: relative;
-    margin-right: 20px;
-    min-width: 150px;
+a {
+  position: relative;
+  margin-right: 20px;
+  min-width: 100px;
+  max-width: 150px;
 
-    @media (max-width: 700px) {
-      & {
-        display: none;
+  img {
+    display: block;
+    margin-top: 5px;
+    width: 100%;
+  }
+}
+
+.welcome {
+  margin: 0 10px;
+  max-width: 130px;
+  width: 100%;
+  display: flex;
+  font-size: 13px;
+  flex-direction: column;
+}
+
+  .DropBoxStyle{
+    & > span{
+      margin-right: -10px !important;
+    }
+
+    div{
+      div{
+        z-index: 100;
+        margin-left: -150px;
+        margin-top: 10px;
+
+        &::before {
+          margin-left: 175px;
+        }
+
+        ul {
+          width: 200px;
+          margin: 10px;
+
+          li {
+            text-align: left;
+            margin: 10px;
+
+            a {
+              color: black;
+
+              &:hover {
+                text-decoration: underline !important;
+              }
+            }
+          }
+        }
       }
     }
-    img {
-      display: block;
-      margin-top: 10px;
-      max-width: 150px;
-      width: 100%;
-    }
-  }
-
-  .welcome {
-    margin: 0 10px;
-    max-width: 130px;
-    width: 100%;
-    display: flex;
-    font-size: 13px;
-    flex-direction: column;
   }
 `;
 
@@ -89,18 +114,26 @@ export const Input = styled.form`
 export const Icons = styled.div`
   display: flex;
   flex-direction: row;
+  margin-right: 10px;
 
-  div,
-  button {
+  & > div,
+  & > button {
     position: relative;
 
-    svg {
+     svg {
       cursor: pointer;
       font-size: 30px;
-      margin: 0 10px;
+      margin: 0 5px;
+      color: white;
+
+      @media (max-width: 800px) {
+          &{
+            font-size: 25px;
+          }
+      }
     }
 
-    span {
+    & > span {
       cursor: pointer;
       display: block;
       font-size: 12px;
@@ -108,11 +141,12 @@ export const Icons = styled.div`
       border-radius: 10px;
       align-self: auto;
       text-align: center;
-      top: 15px;
-      right: 5px;
+      top: 25px;
+      right: 0px;
       height: 20px;
       width: 20px;
       padding: 2px;
+      color: white;
     }
 
     .purple {
@@ -120,44 +154,6 @@ export const Icons = styled.div`
     }
     .green {
       background: ${props => props.theme.colors.green};
-    }
-  }
-`;
-
-export const MenuHelp = styled.div<IdropHelp>`
-z-index: 100;
-  display: ${props => (props.dropHelp ? 'block' : 'none')};
-  position: absolute !important;
-  transition: all 0.3s;
-  animation: ${appearFromTop} 0.5s;
-  padding: 5px;
-  right: 10px;
-  width: 300px;
-  border-radius: 5px;
-  background: white;
-  color: black;
-  border-bottom: 5px solid ${props => props.theme.colors.green};
-  box-shadow: 0px 0px 22px -3px rgba(0, 0, 0, 0.66);
-
-  &::before {
-    content: '';
-    position: absolute;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 10px;
-    top: -5px;
-    right: 0px;
-    width: 0;
-    height: 0;
-
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 5px solid white;
-  }
-
-  ul {
-    li {
-      margin: 15px;
     }
   }
 `;

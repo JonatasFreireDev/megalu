@@ -2,7 +2,7 @@
 import React from 'react';
 import { MenuData } from '../../../Data/MenuData';
 import { usePageConfig } from '../../../store/PageConfig';
-import Box from './Box';
+import DropBox from '../../DropBox';
 import * as S from './styles';
 
 const DropDownMenu: React.FC = () => {
@@ -11,7 +11,7 @@ const DropDownMenu: React.FC = () => {
   return (
     <S.MenuList HeaderIsVisible={getHeaderIsVisible}>
       {MenuData.map(item => (
-        <Box key={item.title} title={item.title}>
+        <DropBox key={item.title} title={item.title}>
           <ul>
             {item.data.map(link => (
               <li>
@@ -20,7 +20,7 @@ const DropDownMenu: React.FC = () => {
             ))}
           </ul>
           {item.image ? <img src={item.image} alt={item.title} /> : ''}
-        </Box>
+        </DropBox>
       ))}
     </S.MenuList>
   );
